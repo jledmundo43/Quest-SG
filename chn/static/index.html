@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<title>投资闯关 SG</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <div class="brand">投资闯关 SG</div>
+    <div class="date" id="date">-</div>
+  </div>
+  <div class="tot">
+    <div class="tot-v" id="total">-</div>
+    <div class="tot-g" id="gain">-</div>
+  </div>
+</header>
+
+<div id="eventsBar" class="events-bar hidden"></div>
+
+<main>
+  <section id="tab-portfolio" class="tab active">
+    <div class="card stats">
+      <div><span>现金</span><b id="cash">-</b></div>
+      <div><span>已投资</span><b id="invested">-</b></div>
+      <div><span>总资产</span><b id="total2">-</b></div>
+      <div title="剔除通胀后，按今天购买力算的总资产"><span>扣除通胀后</span><b id="real">-</b></div>
+    </div>
+    <div class="card">
+      <div class="card-h">总资产走势</div>
+      <canvas id="chart" height="180"></canvas>
+      <div class="mkt" id="mkt"></div>
+    </div>
+    <div class="card">
+      <div class="card-h">你的持仓</div>
+      <div id="positions"></div>
+    </div>
+    <button class="btn ghost danger wide" id="resetBtn">重置 / 新开一局</button>
+  </section>
+
+  <section id="tab-invest" class="tab">
+    <p class="hint">点选产品了解详情并买入。风险：1 = 很稳，5 = 很冒险。</p>
+    <div class="chips" id="classChips"></div>
+    <div id="products"></div>
+  </section>
+
+  <section id="tab-news" class="tab">
+    <div class="card"><div class="card-h">新闻与动态</div><div id="log"></div></div>
+  </section>
+
+  <section id="tab-guide" class="tab">
+    <div class="card guide">
+      <div class="card-h">你的向导</div>
+      <div id="guideOff" class="notice hidden">AI 向导稍后会上线！在此期间游戏其他功能都可正常使用。</div>
+      <div id="chatLog" class="chat-log">
+        <div class="msg bot">嗨！有什么想问的尽管问，比如「什么是债券？」或「为什么我的 ETF 跌了？」</div>
+      </div>
+      <form id="chatForm" class="chat-form">
+        <input id="chatInput" placeholder="输入你的问题…" autocomplete="off" maxlength="500">
+        <button class="btn" type="submit">发送</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div class="timebar">
+  <span>推进时间：</span>
+  <div class="tbtns">
+    <button class="btn time" data-m="6">+6个月</button>
+    <button class="btn time" data-m="12">+1年</button>
+    <button class="btn time" data-m="24">+2年</button>
+    <button class="btn time" data-m="36">+3年</button>
+  </div>
+</div>
+
+<nav class="tabs">
+  <button data-tab="portfolio" class="active">📊<span>资产</span></button>
+  <button data-tab="invest">🛒<span>投资</span></button>
+  <button data-tab="news">📰<span>新闻</span></button>
+  <button data-tab="guide">💬<span>向导</span></button>
+</nav>
+
+<div class="modal hidden" id="welcome">
+  <div class="sheet welcome">
+    <div class="heart">💖</div>
+    <p class="note">嗨，亲爱的，这就是你说能帮你了解投资的理财助手。好好玩吧，一起收获一些实用的投资心得！</p>
+    <p class="note" style="margin-top:10px;opacity:.92">Hi there my love, this is the finance agent that you said would help you in understanding investing. Have fun playing with it and gain some valuable insights!</p>
+    <div class="how">
+      <p><b>怎么玩</b></p>
+      <ul>
+        <li>你一开始有 <b>SGD 50,000</b> 的虚拟资金。</li>
+        <li>去 <b>投资</b> 页，买自己感兴趣的产品。</li>
+        <li>把时间往前推 6 个月到 3 年，看看结果如何。</li>
+        <li>市场是随机但贴近现实的，会有崩盘、加息等意外。</li>
+      </ul>
+    </div>
+    <button class="btn wide" id="startBtn">开始玩</button>
+  </div>
+</div>
+
+<div class="modal hidden" id="tradeModal">
+  <div class="sheet">
+    <button class="x" data-close>&times;</button>
+    <div id="tradeBody"></div>
+  </div>
+</div>
+
+<div class="modal hidden" id="jumpModal">
+  <div class="sheet">
+    <button class="x" data-close>&times;</button>
+    <div id="jumpBody"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
