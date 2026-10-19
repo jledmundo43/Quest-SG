@@ -1,0 +1,14 @@
+.venv/
+bin/
+__pycache__/
+*.py[cod]
+*.log
+.env
+.env.*
+!.env.example
+public_url.txt
+tests/shots/
+*.pem
+*.key
+secrets/
+.DS_Store
