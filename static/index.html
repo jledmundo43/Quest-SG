@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<title>Invest Quest SG</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <div class="brand">Invest Quest SG</div>
+    <div class="date" id="date">-</div>
+  </div>
+  <div class="tot">
+    <div class="tot-v" id="total">-</div>
+    <div class="tot-g" id="gain">-</div>
+  </div>
+</header>
+
+<div id="eventsBar" class="events-bar hidden"></div>
+
+<main>
+  <!-- PORTFOLIO -->
+  <section id="tab-portfolio" class="tab active">
+    <div class="card stats">
+      <div><span>Cash</span><b id="cash">-</b></div>
+      <div><span>Invested</span><b id="invested">-</b></div>
+      <div><span>Total</span><b id="total2">-</b></div>
+      <div title="What your total is worth in today's prices after inflation"><span>After inflation</span><b id="real">-</b></div>
+    </div>
+    <div class="card">
+      <div class="card-h">Total value over time</div>
+      <canvas id="chart" height="180"></canvas>
+      <div class="mkt" id="mkt"></div>
+    </div>
+    <div class="card">
+      <div class="card-h">Your holdings</div>
+      <div id="positions"></div>
+    </div>
+    <button class="btn ghost danger wide" id="resetBtn">Reset / New game</button>
+  </section>
+
+  <!-- INVEST -->
+  <section id="tab-invest" class="tab">
+    <p class="hint">Tap a product to read about it and invest. Risk: 1 = very safe, 5 = very risky.</p>
+    <div class="chips" id="classChips"></div>
+    <div id="products"></div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="tab-news" class="tab">
+    <div class="card"><div class="card-h">News &amp; activity log</div><div id="log"></div></div>
+  </section>
+
+  <!-- GUIDE -->
+  <section id="tab-guide" class="tab">
+    <div class="card guide">
+      <div class="card-h">Your guide</div>
+      <div id="guideOff" class="notice hidden">The AI guide will be switched on soon! The rest of the game works fully in the meantime.</div>
+      <div id="chatLog" class="chat-log">
+        <div class="msg bot">Hi! Ask me anything about the game, like "What is a bond?" or "Why did my ETF fall?"</div>
+      </div>
+      <form id="chatForm" class="chat-form">
+        <input id="chatInput" placeholder="Ask a question..." autocomplete="off" maxlength="500">
+        <button class="btn" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div class="timebar">
+  <span>Move time forward:</span>
+  <div class="tbtns">
+    <button class="btn time" data-m="6">+6 mo</button>
+    <button class="btn time" data-m="12">+1 yr</button>
+    <button class="btn time" data-m="24">+2 yrs</button>
+    <button class="btn time" data-m="36">+3 yrs</button>
+  </div>
+</div>
+
+<nav class="tabs">
+  <button data-tab="portfolio" class="active">📊<span>Portfolio</span></button>
+  <button data-tab="invest">🛒<span>Invest</span></button>
+  <button data-tab="news">📰<span>News</span></button>
+  <button data-tab="guide">💬<span>Guide</span></button>
+</nav>
+
+<!-- MODALS -->
+<div class="modal hidden" id="welcome">
+  <div class="sheet welcome">
+    <div class="heart">💖</div>
+    <p class="note">Hi there my love, this is the finance agent that you said would help you in understanding investing. Have fun playing with it and gain some valuable insights!</p>
+    <div class="how">
+      <p><b>How it works</b></p>
+      <ul>
+        <li>You start with <b>SGD 50,000</b> of play money.</li>
+        <li>Go to <b>Invest</b> and buy whatever interests you.</li>
+        <li>Move time forward by 6 months to 3 years and see what happens.</li>
+        <li>Markets are random but realistic, with surprises like crashes and rate hikes.</li>
+      </ul>
+    </div>
+    <button class="btn wide" id="startBtn">Start playing</button>
+  </div>
+</div>
+
+<div class="modal hidden" id="tradeModal">
+  <div class="sheet">
+    <button class="x" data-close>&times;</button>
+    <div id="tradeBody"></div>
+  </div>
+</div>
+
+<div class="modal hidden" id="jumpModal">
+  <div class="sheet">
+    <button class="x" data-close>&times;</button>
+    <div id="jumpBody"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
